@@ -11,10 +11,16 @@ public class GhostController : MonoBehaviour
 	[SerializeField] float distance = 0f;
 	float angle;
 
+	void Start()
+	{
+		Transform target = Trap;
+	}
+
 	void Update()
 	{
 		if (Trap == null)
 			return;
+
 		angle += rotateSpeed * Time.deltaTime;
 		// Trap‚ğ‹N“_‚Æ‚µ‚Äã‰º‰^“®‚ğ‚·‚é
 		Vector3 offset = new Vector3( Mathf.Cos(angle * Mathf.Deg2Rad) - GhostX,GhostY, GhostZ) * distance;
