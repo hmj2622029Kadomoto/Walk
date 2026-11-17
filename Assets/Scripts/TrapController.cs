@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TrapController : MonoBehaviour
 {
+	[SerializeField] GameObject GhostPrefab;
 	void Start()
 	{
 
