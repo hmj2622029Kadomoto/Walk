@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 220276523}
   - component: {fileID: 220276522}
   - component: {fileID: 220276521}
-  - component: {fileID: 220276525}
+  - component: {fileID: 220276526}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -185,7 +185,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,12 +227,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &220276525
+--- !u!114 &220276526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,10 +241,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 220276520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c8e45061b3e4e46a701e768bd39bc2, type: 3}
+  m_Script: {fileID: 11500000, guid: b731371c4acaecd4d9be0848a059f8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapController
-  GhostPrefab: {fileID: 0}
+  GhostPrefab:
+  - {fileID: 7718865715088672821, guid: 1495e095dedad494f8be0ed4e4d0d484, type: 3}
+  - {fileID: 7684086701716248487, guid: 578f7a993492761428bb0a4bc5d2ba53, type: 3}
+  - {fileID: 3885721793909077983, guid: e033b418103284f448b764c7fdd003ee, type: 3}
+  - {fileID: 6829213354910199111, guid: 8ec0477a88be7984796b973e6052c62f, type: 3}
+  - {fileID: 7886876694263711290, guid: b2375a3d8120b3842ace2c86b8ed3ed4, type: 3}
+  - {fileID: 813205322875078805, guid: 1f8d85468a69d7a40baa4e26abe98eed, type: 3}
+  GhostSpawnPoint: {fileID: 220276524}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +339,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -347,7 +354,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &410087039
@@ -486,7 +493,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 832575517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &832575519
@@ -519,7 +526,7 @@ GameObject:
   - component: {fileID: 1089289871}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -546,8 +553,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -638,7 +645,7 @@ Transform:
   m_GameObject: {fileID: 1089289870}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
