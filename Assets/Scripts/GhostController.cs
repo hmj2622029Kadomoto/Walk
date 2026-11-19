@@ -2,28 +2,112 @@ using UnityEngine;
 
 public class GhostController : MonoBehaviour
 {
-	[SerializeField] Transform Trap;
-	[SerializeField] float rotateSpeed = 90f;
-	[SerializeField] float GhostX = 1f;
-	[SerializeField] float GhostY = 1f;
-	[SerializeField] float GhostZ = 1f;
-
-	[SerializeField] float distance = 0f;
-	float angle;
-
-	void Start()
+	enum GhostType
 	{
-		Transform target = Trap;
+		LeftRight,
+		UpDown,
+		ForwardBack,
+		Circle,
+		Approach,
+		Teleport
+	}
+	[SerializeField] float moveSpeed = 2f;
+	[SerializeField] float teleportInterval = 2f;
+	[SerializeField] float distance = 0f;
+
+	Transform M_Trap;
+	Transform target;
+
+	GhostType ghostType;
+
+	float angle;
+	float teleportTimer;
+
+	Vector3 startPosition;
+	Vector3 circleCenter;
+
+	private void Start()
+	{
+		// 初期位置を保存
+		startPosition = transform.position;
+		circleCenter = transform.position;
+	}
+
+	public void Initialize(Transform Trap,Transform Player)
+	{
+		M_Trap = Trap;
+		target = Player;
+
+		// 6種類からランダム選択
+		ghostType = (GhostType)Random.Range(0, 6);
+
+		startPosition = transform.position;
+		circleCenter = transform.position;
 	}
 
 	void Update()
 	{
-		if (Trap == null)
+		if (target == null)
 			return;
 
-		angle += rotateSpeed * Time.deltaTime;
-		// Trapを起点として上下運動をする
-		Vector3 offset = new Vector3( Mathf.Cos(angle * Mathf.Deg2Rad) - GhostX,GhostY, GhostZ) * distance;
-		transform.position = Trap.position + offset;
+		angle += moveSpeed * Time.deltaTime;
+
+		float wave = Mathf.Sin(angle);
+
+		switch(ghostType)
+		{
+			case GhostType.LeftRight:
+				// 左右
+				transform.position = startPosition + new Vector3(wave * distance,0f,0f);
+				break;
+			case GhostType.UpDown:
+				// 上下
+				transform.position = startPosition + new Vector3(0f,wave * distance,0f);
+				break;
+			case GhostType.ForwardBack:
+				// 前後
+				transform.position = startPosition + new Vector3(0, 0, wave * distance);
+				break;
+			case GhostType.Circle:
+				// 円運動
+				transform.position = circleCenter + new Vector3(Mathf.Cos(angle) * distance, 0f, Mathf.Sin(angle) * distance);
+				break;
+			case GhostType.Approach:
+				// 接近・後退
+				Vector3 direction = (target.position - startPosition).normalized;
+				transform.position = startPosition + direction * wave * distance;
+				break;
+			case GhostType.Teleport:
+				// 瞬間移動
+				teleportTimer += Time.deltaTime;
+				if(teleportTimer >= teleportInterval)
+				{
+					Teleport();
+					teleportTimer = 0f;
+				}
+				break;
+		}
+
+		// プレイヤーの方を向く
+		Vector3 dir = target.position - transform.position;
+		dir.y = 0f;
+
+		if(dir != Vector3.zero)
+		{
+			transform.rotation = Quaternion.LookRotation(dir);
+		}
+	}
+	void Teleport()
+	{
+		// プレイヤー周囲のランダムな方向
+		float randomAngle = Random.Range(0f, 360f);
+
+		Vector3 direction = new Vector3(Mathf.Cos(randomAngle*Mathf.Deg2Rad),0f,Mathf.Sin(randomAngle*Mathf.Deg2Rad));
+
+		// プレイヤーから離れた場所に移動
+		float randomDistance = Random.Range(3f, 6f);
+		Vector3 newPosition = target.position + direction * randomDistance;
+		newPosition.y = startPosition.y;
+		transform.position = newPosition;
 	}
 }
