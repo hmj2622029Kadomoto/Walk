@@ -4,7 +4,7 @@ using UnityEngine.LowLevelPhysics2D;
 
 public class PlayerMove : MonoBehaviour
 {
-	[SerializeField] float moveSpeed = 10f;
+	[SerializeField] float moveSpeed =7f;
 	
 	// 感性
 	[SerializeField] float acceleration = 30f; // 加速
@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 			rate = deceleration;
 		}
 
-		// 現在の速度から目標速度へ徐々に近づける 感性
+		// 現在の速度から目標速度へ徐々に近づける
 		currentPlaneVel = Vector3.MoveTowards(currentPlaneVel, planeVel, rate * Time.deltaTime);
 
 		// 計算した速度をvelocityに反映
@@ -78,7 +78,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			velocity.y += Physics.gravity.y * Time.deltaTime;
 		}
-		
+
 		// 移動
 		controller.Move(velocity * Time.deltaTime);
     }
