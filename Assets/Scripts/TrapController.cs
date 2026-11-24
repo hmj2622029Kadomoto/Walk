@@ -4,7 +4,6 @@ public class TrapController : MonoBehaviour
 {
 	[SerializeField] GameObject[] GhostPrefab;
 	[SerializeField] Transform GhostSpawnPoint;
-
 	GameObject currentGhost;
 
 	private void OnTriggerEnter(Collider other)
@@ -16,6 +15,7 @@ public class TrapController : MonoBehaviour
 		int index = Random.Range(0, GhostPrefab.Length);
 		currentGhost = Instantiate(GhostPrefab[index], GhostSpawnPoint.position, Quaternion.identity);
 		currentGhost.GetComponent<GhostController>().Initialize(transform,other.transform);
+		// 出現エフェクト
 	}
 	private void OnTriggerExit(Collider other)
 	{

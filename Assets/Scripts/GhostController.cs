@@ -11,6 +11,7 @@ public class GhostController : MonoBehaviour
 		Approach,
 		Teleport
 	}
+
 	[SerializeField] float moveSpeed = 2f;
 	[SerializeField] float teleportInterval = 2f;
 	[SerializeField] float distance = 0f;
@@ -28,6 +29,7 @@ public class GhostController : MonoBehaviour
 
 	private void Start()
 	{
+		GetComponent<ParticleSystem>().Play();
 		// 初期位置を保存
 		startPosition = transform.position;
 		circleCenter = transform.position;
@@ -58,15 +60,17 @@ public class GhostController : MonoBehaviour
 		{
 			case GhostType.LeftRight:
 				// 左右
-				transform.position = startPosition + new Vector3(wave * distance,0f,0f);
+				transform.position = circleCenter + new Vector3(Mathf.Cos(angle) * distance, 0f, 0f);
 				break;
 			case GhostType.UpDown:
-				// 上下
-				transform.position = startPosition + new Vector3(0f,wave * distance,0f);
+				// 上下				
+				transform.position = circleCenter + new Vector3(0f, Mathf.Cos(angle) * distance, 0f);
+
 				break;
 			case GhostType.ForwardBack:
-				// 前後
-				transform.position = startPosition + new Vector3(0, 0, wave * distance);
+				// 前後				
+				transform.position = circleCenter + new Vector3(0f, 0f, Mathf.Cos(angle) * distance);
+
 				break;
 			case GhostType.Circle:
 				// 円運動
@@ -99,6 +103,7 @@ public class GhostController : MonoBehaviour
 	}
 	void Teleport()
 	{
+		GetComponent<ParticleSystem>().Play();
 		// プレイヤー周囲のランダムな方向
 		float randomAngle = Random.Range(0f, 360f);
 
