@@ -703,7 +703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GhostController
   moveSpeed: 2
   teleportInterval: 1
-  distance: 5
+  distance: 7.5
   SE: {fileID: 8300000, guid: 89367178f9754e342bdd6a7b6e8e883d, type: 3}
 --- !u!198 &8334761630661922867
 ParticleSystem:
