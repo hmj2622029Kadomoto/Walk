@@ -27,7 +27,6 @@ public class GhostController : MonoBehaviour
 	float angle;
 	float teleportTimer;
 
-	Vector3 startPosition;
 	Vector3 circleCenter;
 
 	private void Start()
@@ -36,7 +35,6 @@ public class GhostController : MonoBehaviour
 		audioSource = GetComponent<AudioSource>();
 
 		// 初期位置を保存
-		startPosition = transform.position;
 		circleCenter = transform.position;
 	}
 
@@ -48,7 +46,6 @@ public class GhostController : MonoBehaviour
 		// 6種類からランダム選択
 		ghostType = (GhostType)Random.Range(0, 6);
 
-		startPosition = transform.position;
 		circleCenter = transform.position;
 	}
 
@@ -83,8 +80,8 @@ public class GhostController : MonoBehaviour
 				break;
 			case GhostType.Approach:
 				// 接近・後退
-				Vector3 direction = (target.position - startPosition).normalized;
-				transform.position = startPosition + direction * wave * distance;
+				Vector3 direction = (target.position - circleCenter).normalized;
+				transform.position = circleCenter + direction * wave * distance;
 				break;
 			case GhostType.Teleport:
 				// 瞬間移動
@@ -118,7 +115,7 @@ public class GhostController : MonoBehaviour
 		// プレイヤーから離れた場所に移動
 		float randomDistance = Random.Range(3f, 6f);
 		Vector3 newPosition = target.position + direction * randomDistance;
-		newPosition.y = startPosition.y;
+		newPosition.y = circleCenter.y;
 		transform.position = newPosition;
 	}
 }
