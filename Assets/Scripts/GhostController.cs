@@ -28,6 +28,7 @@ public class GhostController : MonoBehaviour
 	float teleportTimer;
 
 	Vector3 circleCenter;
+	Vector3 playerCenter;
 
 	private void Start()
 	{
@@ -35,7 +36,7 @@ public class GhostController : MonoBehaviour
 		audioSource = GetComponent<AudioSource>();
 
 		// ‰ŠúˆÊ’u‚ğ•Û‘¶
-		circleCenter = transform.position;
+		circleCenter = target.position;
 	}
 
 	public void Initialize(Transform Trap,Transform Player)
@@ -46,7 +47,7 @@ public class GhostController : MonoBehaviour
 		// 6í—Ş‚©‚çƒ‰ƒ“ƒ_ƒ€‘I‘ğ
 		ghostType = (GhostType)Random.Range(0, 6);
 
-		circleCenter = transform.position;
+		circleCenter = target.position;
 	}
 
 	void Update()
