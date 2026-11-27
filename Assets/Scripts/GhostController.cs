@@ -15,6 +15,7 @@ public class GhostController : MonoBehaviour
 	[SerializeField] float moveSpeed = 2f;
 	[SerializeField] float teleportInterval = 2f;
 	[SerializeField] float distance = 0f;
+	[SerializeField] float spawnDis = 5f;
 	[SerializeField] AudioClip SE;
 
 	AudioSource audioSource;
@@ -28,15 +29,11 @@ public class GhostController : MonoBehaviour
 	float teleportTimer;
 
 	Vector3 circleCenter;
-	Vector3 playerCenter;
 
 	private void Start()
 	{
 		GetComponent<ParticleSystem>().Play();
 		audioSource = GetComponent<AudioSource>();
-
-		// 初期位置を保存
-		circleCenter = target.position;
 	}
 
 	public void Initialize(Transform Trap,Transform Player)
@@ -44,10 +41,15 @@ public class GhostController : MonoBehaviour
 		M_Trap = Trap;
 		target = Player;
 
+		Vector3 forward = Player.forward;
+		forward.y = 0f;
+		forward.Normalize();
+
+		circleCenter = Player.position + forward * spawnDis;
+		transform.position = circleCenter;
+
 		// 6種類からランダム選択
 		ghostType = (GhostType)Random.Range(0, 6);
-
-		circleCenter = target.position;
 	}
 
 	void Update()
@@ -111,7 +113,7 @@ public class GhostController : MonoBehaviour
 		// プレイヤー周囲のランダムな方向
 		float randomAngle = Random.Range(0f, 360f);
 
-		Vector3 direction = new Vector3(Mathf.Cos(randomAngle*Mathf.Deg2Rad),0f,Mathf.Sin(randomAngle*Mathf.Deg2Rad));
+		Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), 0f, Mathf.Sin(randomAngle * Mathf.Deg2Rad));
 
 		// プレイヤーから離れた場所に移動
 		float randomDistance = Random.Range(3f, 6f);

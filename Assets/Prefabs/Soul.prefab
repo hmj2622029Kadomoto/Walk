@@ -4854,6 +4854,7 @@ MonoBehaviour:
   moveSpeed: 2
   teleportInterval: 1
   distance: 7.5
+  spawnDis: 5
   SE: {fileID: 8300000, guid: 89367178f9754e342bdd6a7b6e8e883d, type: 3}
 --- !u!82 &1083192997316038818
 AudioSource:
@@ -4994,7 +4995,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.5, b: 0.5, a: 1}
   m_Intensity: 1
   m_Range: 3
   m_SpotAngle: 30
